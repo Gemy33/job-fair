@@ -12,6 +12,7 @@ export const routes: Routes = [
     {path:'',redirectTo:'home',pathMatch:'full'},
 {path:'home',component:HomComponent},
 {path:'product/:id',component:ProductDetailsComponent},
+{path:'products/:cat',component:ProductComponent},
 
 {path:'product',component:ProductComponent},
 {path:'cart',component:CartComponent},

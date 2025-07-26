@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Iproduct } from '../../interfaces/product';
 import { CurrencyPipe, NgFor } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
@@ -17,17 +17,30 @@ export class ProductComponent implements OnInit {
 filteredProducts: any[] = [];
 searchTerm: string = '';
 sortOption: string = '';
-  constructor(private ProductsService : ProductsService){}
+  constructor(private ProductsService : ProductsService , private ActivatedRoute:ActivatedRoute ){}
   allProducts:Iproduct[]=[]
+  category!:any
   ngOnInit(): void {
+    this.ActivatedRoute.paramMap.subscribe((p)=>{
+      this.category=p.get('cat');
+      console.log(p.get('cat'));
+      
     
-    
-    this.ProductsService.getAllProduct().subscribe({
-      next:(res=> {
+    if(this.category)
+    {
+      console.log("entered");
+      
+        this.ProductsService.getAllProduct().subscribe({
+      next:((res:Iproduct[])=> {
         console.log(res)
-         this.products = res;
+        this.products=res;
+        this.allProducts= res.filter((p)=>{
+          return p.category==this.category;
+         })
+         
+         
+         
     this.filteredProducts = [...res];
-        this.allProducts=res;
         // console.log(this.allProducts);
         
       }),
@@ -37,6 +50,31 @@ sortOption: string = '';
       
      
     })
+    }
+    else
+    {
+      this.ProductsService.getAllProduct().subscribe({
+      next:(res=> {
+        this.allProducts= res;
+        this.products=res;
+
+         
+         
+    this.filteredProducts = [...res];
+        // console.log(this.allProducts);
+        
+      }),
+      error:(err =>   console.log(err)),
+      
+        
+      
+     
+    })
+    }
+    })
+    
+    
+   
   }
 
   onSearchChange() {

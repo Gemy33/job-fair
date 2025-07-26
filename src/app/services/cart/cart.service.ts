@@ -6,10 +6,21 @@ import { baseUrl } from '../../env/baseUrl';
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
-      count=signal(0);
+export class CartService implements OnInit {
 
-  constructor(private HttpClient:HttpClient) { }
+      count=signal(3);
+
+
+  constructor(private HttpClient:HttpClient) { 
+    this.getAllCart(1).subscribe(res=>
+      this.upDataCount(res.products.length))
+
+  }
+  ngOnInit(): void {
+    
+
+    
+  }
  
 
   getAllCart(id:number):Observable<any>

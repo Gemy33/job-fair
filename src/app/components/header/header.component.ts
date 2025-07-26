@@ -1,4 +1,4 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../services/cart/cart.service';
 import { single } from 'rxjs';
@@ -10,12 +10,16 @@ import { single } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-count:any;
-  constructor(private CartService:CartService){
-this.count=computed(()=>{
+export class HeaderComponent implements OnInit {
+count=computed(()=>{
     return this.CartService.count();
   })
+  constructor(private CartService:CartService){
+    
+
+  }
+  ngOnInit(): void {
+  
   }
   
 }

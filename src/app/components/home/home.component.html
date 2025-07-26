@@ -21,7 +21,7 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center">
       @for (cat of allCategory(); track $index) {
-    <div class="bg-white text-gray-800 text-lg font-semibold py-10 px-12 w-full sm:w-64 rounded-xl shadow-md transition-transform transform hover:scale-105 hover:bg-indigo-400 cursor-pointer">
+    <div [routerLink]="['/products',cat]" class="bg-white text-gray-800 text-lg font-semibold py-10 px-12 w-full sm:w-64 rounded-xl shadow-md transition-transform transform hover:scale-105 hover:bg-indigo-400 cursor-pointer">
       {{cat}}
     </div>
   }
