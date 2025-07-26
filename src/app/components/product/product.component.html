@@ -1,4 +1,28 @@
-<section class="bg-gray-50 py-16">
+
+<div class="max-w-6xl mx-auto  mt-11 p-4">
+  <!-- Controls -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+    <!-- Search -->
+    <input
+      [(ngModel)]="searchTerm"
+      (input)="onSearchChange()"
+      placeholder="Search products..."
+      class="w-full md:w-1/2 p-2 border border-gray-300 rounded"
+    />
+
+    <!-- Sort -->
+    <select [(ngModel)]="sortOption" (change)="onSortChange()" class="p-2 border border-gray-300 rounded">
+      <option value="" disabled selected>Sort By</option>
+      <option value="priceLowHigh">Price: Low to High</option>
+      <option value="priceHighLow">Price: High to Low</option>
+      <option value="nameAZ">Name: A–Z</option>
+    </select>
+  </div>
+
+
+</div>
+
+<section class="bg-gray-50 pb-16">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">All Products</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
