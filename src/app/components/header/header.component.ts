@@ -11,6 +11,16 @@ import { single } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
+  isMobileMenuOpen = false;
+  isDarkMode=false;
+toggleDarkMode() {
+  this.isDarkMode = !this.isDarkMode;
+  document.documentElement.classList.toggle('dark', this.isDarkMode);
+  localStorage.setItem('darkMode', this.isDarkMode.toString());
+}
+toggleMobileMenu() {
+  this.isMobileMenuOpen = !this.isMobileMenuOpen;
+}
 count=computed(()=>{
     return this.CartService.count();
   })
@@ -19,6 +29,9 @@ count=computed(()=>{
 
   }
   ngOnInit(): void {
+     const stored = localStorage.getItem('darkMode') === 'true';
+  this.isDarkMode = stored;
+  document.documentElement.classList.toggle('dark', stored);
   
   }
   

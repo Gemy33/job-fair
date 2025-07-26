@@ -25,10 +25,29 @@
           {{count()}}
         </span>
       </div>
+<label class="flex items-center cursor-pointer">
+  <!-- Toggle label -->
+  <span class="mr-3 text-sm font-medium text-gray-900 dark:text-gray-100">Dark Mode</span>
+
+  <!-- Switch container -->
+  <div
+    (click)="toggleDarkMode()"
+    [class.bg-gray-300]="!isDarkMode"
+    [class.bg-indigo-600]="isDarkMode"
+    class="relative inline-block w-14 h-8 rounded-full transition-colors duration-300"
+  >
+    <!-- Circle -->
+    <span
+      [class.translate-x-7]="isDarkMode"
+      class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-300"
+    ></span>
+  </div>
+</label>
+
 
       <!-- Mobile Menu Icon -->
       <div class="md:hidden">
-        <button class="text-gray-700 focus:outline-none">
+        <button (click)="toggleMobileMenu()" class="text-gray-700 focus:outline-none">
           <!-- Hamburger Icon -->
           <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -36,6 +55,16 @@
           </svg>
         </button>
       </div>
+      
     </div>
   </div>
+  @if (isMobileMenuOpen) {
+  
+           <div  class="md:hidden flex  align-middle justify-center bg-gray-50 flex-col text-center  px-4 pb-4 space-y-2">
+  
+        <a routerLink="home" class="block p-2 border text-gray-700 hover:border-indigo-600 hover:text-indigo-600">Home</a>
+        <a routerLink="product" class="block p-2 border text-gray-700 hover:border-indigo-600 hover:text-indigo-600">Products</a>
+        <a routerLink="contact" class="block p-2 border text-gray-700 hover:border-indigo-600 hover:text-indigo-600">Contact</a>
+      </div>
+        }
 </nav>

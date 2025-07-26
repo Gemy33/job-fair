@@ -3,11 +3,12 @@ import { Iproduct } from '../../interfaces/product';
 import { ProductsService } from '../../services/products.service';
 import {  CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NgxSpinnerService, NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor,CurrencyPipe,RouterLink,NgIf],
+  imports: [NgFor,CurrencyPipe, RouterLink, NgIf, NgxSpinnerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -18,11 +19,13 @@ export class HomComponent {
   );
   // allProduct:Iproduct[]=[];
   // allcategory:string[]=[];
-constructor(private ProductsService:ProductsService)
+constructor(private ProductsService:ProductsService,private fd:NgxSpinnerService)
 {
 
 }
   ngOnInit(): void {
+
+    // this.fd.show();
     this.ProductsService.getAllProduct().subscribe({
       next:(res)=>{
         this.allProduct.set(res);
