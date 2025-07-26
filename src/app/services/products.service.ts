@@ -12,4 +12,8 @@ export class ProductsService {
  {
   return this.HttpClient.get(`${baseUrl}/products`);
  }
+ getSepcificProduct(id:number)
+ {
+  return this.HttpClient.get(`${baseUrl}/products/${id}`)
+ }
 }
