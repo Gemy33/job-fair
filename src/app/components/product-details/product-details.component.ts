@@ -19,7 +19,6 @@ export class ProductDetailsComponent {
   ngOnInit()
   {
     this.ActivatedRoute.paramMap.subscribe(par=>{
-      console.log(par.get('id'));
       this.id=Number(par.get('id')!);
       this.ProductsService.getSepcificProduct(this.id).subscribe({
         next:(value) =>{
@@ -45,7 +44,6 @@ export class ProductDetailsComponent {
     }
     this.CartService.addToCart(data).subscribe({
       next:(res)=>{
-        console.log(res);
         
       },
       error:(err)=>{

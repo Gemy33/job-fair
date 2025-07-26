@@ -29,7 +29,6 @@ constructor(private ProductsService:ProductsService,private fd:NgxSpinnerService
     this.ProductsService.getAllProduct().subscribe({
       next:(res)=>{
         this.allProduct.set(res);
-        console.log(this.allProduct())
       },
 
       error:(err)=>console.log(err)

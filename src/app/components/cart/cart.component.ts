@@ -22,10 +22,8 @@ total: number = 0;
 
     this.CartService.getAllCart(JSON.parse(localStorage.getItem('userinfo')!).sub).subscribe({
      next: (res) => {
-      console.log(res);
       
       const latestCart = res[res.length - 1];
-      console.log(res.products);
       this.allProduct=res.products;
       this.CartService.upDataCount(this.allProduct.length)
       
@@ -39,9 +37,7 @@ loadProductDetails(allIds:any[]) {
   for (let i = 0; i < 3; i++) {
    this.ProductsService.getSepcificProduct(allIds[i].productId).subscribe({
       next:(res)=>{
-        console.log(res,i);
         this.cartItems.push(res)
-        console.log(this.cartItems[i]);
         
         
       },
@@ -53,7 +49,6 @@ loadProductDetails(allIds:any[]) {
     });
   
 }
-console.log(this.cartItems,"caaf");
 
     
   }

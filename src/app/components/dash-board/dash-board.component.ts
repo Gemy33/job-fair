@@ -16,10 +16,8 @@ export class DashBoardComponent implements OnInit {
   ngOnInit(): void {
     this.UserAuthService.getAllUsers().subscribe({
       next:(res)=>{
-        console.log(res);
         
         this.user= res.find((u:IUser)=>(u.id==this.id))
-        console.log(this.user);
         
         
       },

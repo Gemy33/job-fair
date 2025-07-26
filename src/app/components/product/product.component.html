@@ -1,5 +1,4 @@
-
-<div class="max-w-6xl mx-auto  mt-11 p-4">
+<div class="max-w-6xl mx-auto mt-11 p-4">
   <!-- Controls -->
   <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
     <!-- Search -->
@@ -7,63 +6,65 @@
       [(ngModel)]="searchTerm"
       (input)="onSearchChange()"
       placeholder="Search products..."
-      class="w-full md:w-1/2 p-2 border border-gray-300 rounded"
+      class="w-full md:w-1/2 p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded"
     />
 
     <!-- Sort -->
-    <select [(ngModel)]="sortOption" (change)="onSortChange()" class="p-2 border border-gray-300 rounded">
+    <select
+      [(ngModel)]="sortOption"
+      (change)="onSortChange()"
+      class="p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded"
+    >
       <option value="" disabled selected>Sort By</option>
       <option value="priceLowHigh">Price: Low to High</option>
       <option value="priceHighLow">Price: High to Low</option>
       <option value="nameAZ">Name: A–Z</option>
     </select>
   </div>
-
-
 </div>
 
-<section class="bg-gray-50 pb-16">
+<section class="bg-gray-50 dark:bg-gray-900 pb-16">
   <div class="max-w-7xl mx-auto px-4">
     @if (category) {
-    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">All Products form {{category}} </h2>
-
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+        All Products from {{category}}
+      </h2>
     }
     @else {
-
-      <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">All Products </h2>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+        All Products
+      </h2>
     }
+
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
       <!-- Product Card -->
-  
- 
-    <div [routerLink]="['/product', item.id]"   *ngFor="let item of allProducts" class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
-        <img [src]="item.image" alt="Product" class="w-full h-48 object-cover rounded-md mb-4">
-        
-        <h3 class="text-lg font-semibold text-gray-800">{{ item.title.split(" ").slice(0,4).join(" ") }}</h3>
-        <!-- Price using custom pipe -->
-        <div class=" flex justify-between mt-3">
-     <p class="text-indigo-600 font-bold">{{ item.price| currency  }}</p>
-    <div >
-       @for (i of [1,2,3,4,5]; track $index) {
-        @if (item.rating.rate>i) {
-            <i class="fas text-yellow-400 fa-star"></i> 
-        }
-       
-      }
-      @if (item.rating.rate%2!=0) {
-            <i class="fas text-yellow-400 fa-star-half-alt"></i> 
-      }
-      <span>{{item.rating.rate}}</span>
-    </div>
-   </div>
+      <div
+        [routerLink]="['/product', item.id]"
+        *ngFor="let item of allProducts"
+        class="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition p-4"
+      >
+        <img [src]="item.image" alt="Product" class="w-full h-48 object-cover rounded-md mb-4" />
+
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+          {{ item.title.split(" ").slice(0,4).join(" ") }}
+        </h3>
+
+        <!-- Price & Rating -->
+        <div class="flex justify-between mt-3">
+          <p class="text-indigo-600 font-bold">{{ item.price | currency }}</p>
+          <div>
+            @for (i of [1,2,3,4,5]; track $index) {
+              @if (item.rating.rate > i) {
+                <i class="fas text-yellow-400 fa-star"></i>
+              }
+            }
+            @if (item.rating.rate % 2 != 0) {
+              <i class="fas text-yellow-400 fa-star-half-alt"></i>
+            }
+            <span class="dark:text-gray-200">{{ item.rating.rate }}</span>
+          </div>
+        </div>
       </div>
-
-    
-      
-
-      
     </div>
-
-    
   </div>
 </section>

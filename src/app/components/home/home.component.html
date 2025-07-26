@@ -1,10 +1,10 @@
 <!-- Hero Section -->
-<section class="bg-gray-100 py-20">
+<section class="bg-gray-100 dark:bg-gray-900 py-20">
   <div class="max-w-7xl mx-auto px-4 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
       Discover Your Perfect Style
     </h1>
-    <p class="text-gray-600 text-lg mb-6">
+    <p class="text-gray-600 dark:text-gray-300 text-lg mb-6">
       Explore our latest collections and enjoy exclusive offers.
     </p>
     <a routerLink="/product"
@@ -15,64 +15,55 @@
 </section>
 
 <!-- Features Section -->
-
-<div class="max-w-6xl p-6 mx-auto px-4 py-12 text-center bg-gray-50 rounded-md m-4">
-  <h2 class="text-4xl font-extrabold mb-10 text-gray-900">Our category</h2>
+<div class="max-w-6xl p-6 mx-auto px-4 py-12 text-center bg-gray-50 dark:bg-gray-800 rounded-md m-4">
+  <h2 class="text-4xl font-extrabold mb-10 text-gray-900 dark:text-white">Our category</h2>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center">
-      @for (cat of allCategory(); track $index) {
-    <div [routerLink]="['/products',cat]" class="bg-white text-gray-800 text-lg font-semibold py-10 px-12 w-full sm:w-64 rounded-xl shadow-md transition-transform transform hover:scale-105 hover:bg-indigo-400 cursor-pointer">
-      {{cat}}
-    </div>
-  }
-    
+    @for (cat of allCategory(); track $index) {
+      <div [routerLink]="['/products',cat]"
+        class="bg-white dark:bg-gray-900 dark:text-gray-100 text-gray-800 text-lg font-semibold py-10 px-12 w-full sm:w-64 rounded-xl shadow-md transition-transform transform hover:scale-105 hover:bg-indigo-400 cursor-pointer">
+        {{cat}}
+      </div>
+    }
   </div>
 </div>
 
-
-
-
 <!-- Featured Products -->
-<section class="bg-gray-50 py-16">
+<section class="bg-gray-50 dark:bg-gray-900 py-16">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Featured Products</h2>
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Featured Products</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
       <!-- Product Card -->
-  
- 
-  <div [routerLink]="['/product', item.id]"  *ngFor="let item of allProduct().reverse().slice(0,8)" class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
-    <img [src]="item.image" alt="Product" class="w-full h-48 object-cover rounded-md mb-4">
-    
-    <h3 class="text-lg font-semibold text-gray-800">{{ item.title.split(" ").length > 3 ?item.title.split(" ").slice(0,3).join(" ") : item.title }}</h3>
-    <!-- Price using custom pipe -->
-   <div class=" flex justify-between mt-3">
-     <p class="text-indigo-600 font-bold">{{ item.price| currency  }}</p>
-    <div >
-       @for (i of [1,2,3,4,5]; track $index) {
-        @if (item.rating.rate>i) {
-            <i class="fas text-yellow-400 fa-star"></i> 
-        }
-       
-      }
-      @if (item.rating.rate%2!=0) {
-            <i class="fas text-yellow-400 fa-star-half-alt"></i> 
-      }
-      <span>{{item.rating.rate}}</span>
-    </div>
-   </div>
+      <div [routerLink]="['/product', item.id]" *ngFor="let item of allProduct().reverse().slice(0,8)"
+        class="bg-white dark:bg-gray-800 rounded-lg shadow hover:shadow-lg transition p-4">
+        <img [src]="item.image" alt="Product" class="w-full h-48 object-cover rounded-md mb-4">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+          {{ item.title.split(" ").length > 3 ?item.title.split(" ").slice(0,3).join(" ") : item.title }}
+        </h3>
 
-    
-  </div>
-  
-
-    
-      
-
-      
+        <!-- Price and Rating -->
+        <div class="flex justify-between mt-3">
+          <p class="text-indigo-600 font-bold">{{ item.price | currency }}</p>
+          <div>
+            @for (i of [1,2,3,4,5]; track $index) {
+              @if (item.rating.rate > i) {
+                <i class="fas text-yellow-400 fa-star"></i>
+              }
+            }
+            @if (item.rating.rate % 2 != 0) {
+              <i class="fas text-yellow-400 fa-star-half-alt"></i>
+            }
+            <span class="dark:text-gray-200">{{item.rating.rate}}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="text-center mt-10">
-      <a routerLink="/product" class="text-indigo-600 hover:underline text-sm font-medium">View all products →</a>
+      <a routerLink="/product"
+         class="text-indigo-600 dark:text-indigo-400 hover:underline text-sm font-medium">
+        View all products →
+      </a>
     </div>
   </div>
 </section>
