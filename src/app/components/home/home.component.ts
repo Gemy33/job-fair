@@ -1,13 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Iproduct } from '../../interfaces/product';
 import { ProductsService } from '../../services/products.service';
-import {  CurrencyPipe, NgFor } from '@angular/common';
+import {  CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor,CurrencyPipe,RouterLink],
+  imports: [NgFor,CurrencyPipe,RouterLink,NgIf],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -35,5 +35,15 @@ constructor(private ProductsService:ProductsService)
     })
     // this.getCateg();
   }
+  addToCart(product: any) {
+  // const exists = this.cartItems.find((p) => p.id === product.id);
+  // if (!exists) {
+  //   this.cartItems.push({ ...product, quantity: 1 });
+  // }
+}
+
+isInCart(product: any) {
+  // return this.cartItems.some((p) => p.id === product.id);
+}
   // getCateg():void
 }

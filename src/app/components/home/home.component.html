@@ -41,10 +41,27 @@
   <div [routerLink]="['/product', item.id]"  *ngFor="let item of allProduct().reverse().slice(0,8)" class="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
     <img [src]="item.image" alt="Product" class="w-full h-48 object-cover rounded-md mb-4">
     
-    <h3 class="text-lg font-semibold text-gray-800">{{ item.title.split(" ").slice(0,4).join(" ") }}</h3>
+    <h3 class="text-lg font-semibold text-gray-800">{{ item.title.split(" ").length > 3 ?item.title.split(" ").slice(0,3).join(" ") : item.title }}</h3>
     <!-- Price using custom pipe -->
-    <p class="text-indigo-600 font-bold">{{ item.price| currency  }}</p>
+   <div class=" flex justify-between mt-3">
+     <p class="text-indigo-600 font-bold">{{ item.price| currency  }}</p>
+    <div >
+       @for (i of [1,2,3,4,5]; track $index) {
+        @if (item.rating.rate>i) {
+            <i class="fas text-yellow-400 fa-star"></i> 
+        }
+       
+      }
+      @if (item.rating.rate%2!=0) {
+            <i class="fas text-yellow-400 fa-star-half-alt"></i> 
+      }
+      <span>{{item.rating.rate}}</span>
+    </div>
+   </div>
+
+    
   </div>
+  
 
     
       
