@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Iproduct } from '../../interfaces/product';
 import { ProductsService } from '../../services/products.service';
+import { CartService } from '../../services/cart/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +15,7 @@ export class ProductDetailsComponent {
 
   id!:number;
   product:any;
-  constructor(private ActivatedRoute:ActivatedRoute,private ProductsService : ProductsService){}
+  constructor(private ActivatedRoute:ActivatedRoute,private CartService:CartService,private ProductsService : ProductsService){}
   ngOnInit()
   {
     this.ActivatedRoute.paramMap.subscribe(par=>{
@@ -33,6 +34,24 @@ export class ProductDetailsComponent {
        
       })
       
+    })
+  }
+  addTocart()
+  {
+    const data={
+      id:this.product.id,
+      userId:JSON.parse(localStorage.getItem('userinfo')!).sub,
+      products:[this.product],
+    }
+    this.CartService.addToCart(data).subscribe({
+      next:(res)=>{
+        console.log(res);
+        
+      },
+      error:(err)=>{
+        console.log(err);
+        
+      }
     })
   }
 }

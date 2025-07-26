@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md">
+  <h2 class="text-2xl font-bold mb-4">Login</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!-- Dropdown -->
+    <label class="block mb-2 font-medium">Username</label>
+    <select formControlName="username" class="w-full p-2 border rounded mb-4">
+      <option value="" disabled selected>Select a user</option>
+      <option *ngFor="let user of users" [value]="user.username">
+        {{ user.username }} ({{ user.name.firstname }} {{ user.name.lastname }})
+      </option>
+    </select>
+
+    <!-- Password input -->
+    <label class="block mb-2 font-medium">Password</label>
+    <input type="password" formControlName="password" class="w-full p-2 border rounded mb-4" />
+
+    <!-- Submit -->
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+      Login
+    </button>
+  </form>
+</div>

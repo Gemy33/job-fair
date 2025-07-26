@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../services/cart/cart.service';
+import { single } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +11,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-
+count:any;
+  constructor(private CartService:CartService){
+this.count=computed(()=>{
+    return this.CartService.count();
+  })
+  }
+  
 }
